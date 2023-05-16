@@ -1,8 +1,8 @@
 <?php 
-$host = "localhost";
-$user = "root";
-$password = "";
-$db = "pms_db";
+$host = "sql596.main-hosting.eu";
+$user = "u876447700_root";
+$password = "XirTech191200.";
+$db = "u876447700_integration";
 try {
 
   $con = new PDO("mysql:dbname=$db;port=3306;host=$host", 

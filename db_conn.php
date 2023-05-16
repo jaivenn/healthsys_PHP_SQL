@@ -1,5 +1,5 @@
 <?php 
-$Servername = "sql1596.main-hosting.eu";
+$Servername = "sql596.main-hosting.eu";
 $database = "u876447700_integration";
 $username = "u876447700_root";
 $password = "XirTech191200.";
