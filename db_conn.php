@@ -1,8 +1,8 @@
 <?php 
 $Servername = "sql1596.main-hosting.eu";
 $database = "u876447700_integration";
-$username = "u86447700_root";
-$password = "Admin123";
+$username = "u876447700_root";
+$password = "XirTech191200.";
 
 $conn = mysqli_connect($Servername, $database, $username, $password);
 
