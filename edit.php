@@ -1,5 +1,5 @@
 <?php
-include "db_conn.php";
+include "conn.php";
 $id = isset($_GET['id']) ? $_GET['id'] : null;
 if (!is_numeric($id)) {
     // Handle invalid ID
@@ -91,7 +91,7 @@ if (isset($_POST["submit"])) {
 
           <div class="col">
             <label class="form-label">User Name:</label>
-            <input type="user_name" class="form-control" name="user_name" value="<?php echo $row['username'] ?>">
+            <input type="user_name" class="form-control" name="user_name" value="<?php echo $row['user_name'] ?>">
           </div>
 
           <div class="col">

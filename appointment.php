@@ -1,5 +1,5 @@
 <?php
-require "db_conn.php";
+require "conn.php";
 ?>
 
 <!DOCTYPE html>
@@ -51,20 +51,9 @@ require "db_conn.php";
       </thead>
       <tbody>
         <?php
-        $queryUsers = "SELECT * from req_form";
-        $stmtUsers = '';
-
-        try {
-          $stmtUsers = $con->prepare($queryUsers);
-          $stmtUsers->execute();
-        } catch (PDOException $ex) {
-          echo $ex->getTraceAsString();
-          echo $ex->getMessage();
-          exit;
-        }
-        $serial = 0;
-        while ($row = $stmtUsers->fetch(PDO::FETCH_ASSOC)) {
-          $serial++;
+        $sql = "SELECT * FROM `req_form`";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
         ?>
           <tr>
             <td><?php echo $row["id"] ?></td>

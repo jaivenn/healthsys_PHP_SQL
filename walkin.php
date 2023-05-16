@@ -1,5 +1,5 @@
 <?php
-include "db_conn.php";
+include "conn.php";
 ?>
 
 <!DOCTYPE html>
@@ -45,20 +45,9 @@ include "db_conn.php";
       </thead>
       <tbody>
         <?php
-        $queryUsers = "SELECT * from walkin";
-        $stmtUsers = '';
-
-        try {
-          $stmtUsers = $con->prepare($queryUsers);
-          $stmtUsers->execute();
-        } catch (PDOException $ex) {
-          echo $ex->getTraceAsString();
-          echo $ex->getMessage();
-          exit;
-        }
-        $serial = 0;
-        while ($row = $stmtUsers->fetch(PDO::FETCH_ASSOC)) {
-          $serial++;
+        $sql = "SELECT * FROM `walkin`";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
         ?>
           <tr>
             <td><?php echo $row["id"] ?></td>
