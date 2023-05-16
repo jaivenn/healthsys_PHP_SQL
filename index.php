@@ -12,15 +12,15 @@ if(isset($_POST['login'])) {
 
     $encryptedPassword = password_hash($password,PASSWORD_DEFAULT);
 
-    $query = "SELECT `id`, `display_name`, `username`, `profile_picture`, `role` FROM `users` 
-        WHERE `user_name` = '$userName' AND `password` = '$encryptedPassword';";
+    $query = "SELECT `id`, `name`, `username`, `profile_picture`, `user_type` FROM `users` 
+        WHERE `username` = '$userName'";
 
     try {
         $stmtLogin = $con->prepare($query);
         $stmtLogin->execute();
 
         $count = $stmtLogin->rowCount();
-        if($count == 1) {
+        if($count > 0) {
             $row = $stmtLogin->fetch(PDO::FETCH_ASSOC);
 
             $_SESSION['user_id'] = $row['id'];
@@ -28,15 +28,17 @@ if(isset($_POST['login'])) {
             $_SESSION['user_name'] = $row['username'];
             $_SESSION['profile_picture'] = $row['profile_picture'];
 
-            $role = $row['role'];
-
-            if($role === 'admin') {
-                header("location: users.php");
-                exit;
-            } elseif($role === 'user') {
-                header("location: z_user.PHP");
-                exit;
+            $role = $row['user_type'];
+          if (password_verify($password, $encryptedPassword)){
+            if ($role === 'admin') {
+              header("location: users.php");
+              exit;
+            } elseif ($role === 'user') {
+              header("location: z_user.PHP");
+              exit;
             }
+          }
+            
         } else {
             $message = 'Incorrect username or password.';
         }
