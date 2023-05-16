@@ -51,9 +51,20 @@ require "db_conn.php";
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM `req_form`";
-        $result = mysqli_query($con, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
+        $queryUsers = "SELECT * from req_form";
+        $stmtUsers = '';
+
+        try {
+          $stmtUsers = $con->prepare($queryUsers);
+          $stmtUsers->execute();
+        } catch (PDOException $ex) {
+          echo $ex->getTraceAsString();
+          echo $ex->getMessage();
+          exit;
+        }
+        $serial = 0;
+        while ($row = $stmtUsers->fetch(PDO::FETCH_ASSOC)) {
+          $serial++;
         ?>
           <tr>
             <td><?php echo $row["id"] ?></td>
@@ -62,7 +73,7 @@ require "db_conn.php";
 			      <td><?php echo $row["mobile"] ?></td>
             <td><?php echo $row["date"] ?></td>
             <td><?php echo $row["message"] ?></td>
-			      <td><?php echo $row["username"] ?></td>
+			      <td><?php echo $row["user_name"] ?></td>
             <td><?php echo $row["status"] ?></td>
             <td>
               <a href="edit.php?id=<?php echo $row["id"] ?>" class="link-dark "><i class="fa-solid fa-pen-to-square fs-5 me-3 float-start"></i></a>

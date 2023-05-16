@@ -45,9 +45,20 @@ include "db_conn.php";
       </thead>
       <tbody>
         <?php
-        $sql = "SELECT * FROM `walkin`";
-        $result = mysqli_query($con, $sql);
-        while ($row = mysqli_fetch_assoc($result)) {
+        $queryUsers = "SELECT * from walkin";
+        $stmtUsers = '';
+
+        try {
+          $stmtUsers = $con->prepare($queryUsers);
+          $stmtUsers->execute();
+        } catch (PDOException $ex) {
+          echo $ex->getTraceAsString();
+          echo $ex->getMessage();
+          exit;
+        }
+        $serial = 0;
+        while ($row = $stmtUsers->fetch(PDO::FETCH_ASSOC)) {
+          $serial++;
         ?>
           <tr>
             <td><?php echo $row["id"] ?></td>
