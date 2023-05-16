@@ -46,7 +46,7 @@ include "db_conn.php";
       <tbody>
         <?php
         $sql = "SELECT * FROM `walkin`";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($con, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
           <tr>

@@ -1,5 +1,5 @@
 <?php
-include "db_conn.php";
+require "db_conn.php";
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ include "db_conn.php";
       <tbody>
         <?php
         $sql = "SELECT * FROM `req_form`";
-        $result = mysqli_query($conn, $sql);
+        $result = mysqli_query($con, $sql);
         while ($row = mysqli_fetch_assoc($result)) {
         ?>
           <tr>

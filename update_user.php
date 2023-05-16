@@ -4,7 +4,7 @@ include './common_service/common_functions.php';
 $message = '';
 $user_id = $_GET['user_id'];
 
-$query = "SELECT `id`, `display_name`, `username` from `users`
+$query = "SELECT `id`, `name`, `username` from `users`
 where `id` = $user_id;";
 
 
@@ -19,7 +19,7 @@ try {
 }
 
 if (isset($_POST['save_user'])) {
- $displayName = trim($_POST['display_name']);
+ $displayName = trim($_POST['name']);
  $userName = trim($_POST['username']);
  $password = $_POST['password'];
 $hiddenId = $_POST['hidden_id'];
@@ -33,19 +33,19 @@ $hiddenId = $_POST['hidden_id'];
  $encryptedPassword = md5($password);
  if($displayName !='' && $userName !='' && $password !='' && $status !='') {
 
-  $updateUserQuery = "UPDATE `users` set `display_name` = '$displayName' ,`username` = '$userName', `password` = 
+  $updateUserQuery = "UPDATE `users` set `name` = '$displayName' ,`username` = '$userName', `password` = 
   '$encryptedPassword' , `profile_picture` = '$targetFile'
   where `id` = $hiddenId";
 
 }elseif ($displayName !=='' && $userName !=='' && $password !==''){
 
-  $updateUserQuery = "UPDATE `users` set `display_name` = '$displayName' ,`username` = '$userName' , `password` = 
+  $updateUserQuery = "UPDATE `users` set `name` = '$displayName' ,`username` = '$userName' , `password` = 
   '$encryptedPassword' 
   where `id` = $hiddenId";
 
 }elseif ($displayName !=='' && $userName !=='' && $status !==''){
 
-  $updateUserQuery = "UPDATE `users` set `display_name` = '$displayName' , `username` = '$userName' , `profile_picture` = '$targetFile ' 
+  $updateUserQuery = "UPDATE `users` set `name` = '$displayName' , `username` = '$userName' , `profile_picture` = '$targetFile ' 
    where `id` = $hiddenId";
 }
 
@@ -119,7 +119,7 @@ include './config/sidebar.php';?>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
                   <label>Display Name</label>
                   <input type="text" id="display_name" name="display_name" required="required"
-                  class="form-control form-control-sm rounded-0" value="<?php echo $row['display_name'];?>" />
+                  class="form-control form-control-sm rounded-0" value="<?php echo $row['name'];?>" />
                 </div>
                 <br>
                 <br>

@@ -1,14 +1,32 @@
 <?php 
-$Servername = "sql596.main-hosting.eu";
-$database = "u876447700_integration";
-$username = "u876447700_root";
+$host = "sql596.main-hosting.eu";
+$user = "u876447700_root";
 $password = "XirTech191200.";
+$db = "u876447700_integration";
+try {
 
-$conn = mysqli_connect($Servername, $database, $username, $password);
-
-if (!$conn) {
-  die("Cpnnection failed ". mysqli_connect_error());
-
+  $con = new PDO("mysql:dbname=$db;port=3306;host=$host", 
+  	$user, $password); 
+  // set the PDO error mode to exception
+  $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  
+  //echo "Connected successfully";
+} catch(PDOException $e) {
+  echo "Connection failed: ".
+   $e->getMessage();
+  echo $e->getTraceAsString();
+  exit;
 }
+if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+
+
+
+//24 minutes default idle time
+// if(isset($_SESSION['ABC'])) {
+// 	unset($_SESSION['ABC']);
+// }
 
 ?>
